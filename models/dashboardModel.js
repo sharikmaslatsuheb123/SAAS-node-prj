@@ -15,6 +15,7 @@ const Dashboard = {
         const query = 'DELETE FROM dashboard_items WHERE id = ?';
         db.query(query, [id], callback);
     }
+   
 };
 
 module.exports = Dashboard;

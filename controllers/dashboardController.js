@@ -46,6 +46,32 @@ exports.addItem = (req, res) => {
     });
 };
 
+exports.getUserById = (req, res) => {
+    const userId = req.params.userId;
+
+    // Log the userId for debugging
+    console.log("Fetching data for userId:", userId);
+
+    if (!userId) {
+        return res.status(400).json({ error: 'Missing userId parameter' });
+    }
+
+    Dashboard.findByUserId(userId, (err, results) => {
+        if (err) {
+            console.error('Error fetching user items:', err); // Log error details
+            return res.status(500).json({ error: 'Database error', details: err.message });
+        }
+
+        if (results.length === 0) {
+            return res.status(404).json({ message: 'No items found for this user' });
+        }
+
+        res.status(200).json({
+            message: 'Items retrieved successfully',
+            items: results,
+        });
+    });
+};
 
 exports.deleteItem = (req, res) => {
     const { id } = req.params;
