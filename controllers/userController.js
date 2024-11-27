@@ -22,7 +22,7 @@ exports.login = (req, res) => {
         if (results.length === 0 || results[0].password !== password) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
-        res.status(200).json({ message: 'Login successful', userId: results[0].id });
+        res.status(200).json({ message: 'Login successful', userId: results[0].id ,userName: results[0].username,email : results[0].email});
     });
 };
 
